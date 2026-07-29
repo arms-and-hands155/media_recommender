@@ -1,2 +1,3 @@
 venv/
-data/data.jsonl
+data/anime_data.jsonl
+data/manga_data.jsonl
