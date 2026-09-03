@@ -208,7 +208,7 @@ if __name__ == "__main__":
     if not liked:
         print("No titles entered.")
     else:
-        for engine, label in [(recommend, "ITEM-CF"), (recommend_neural, "TWO-TOWER")]:
+        for engine, label in [(recommend_neural, "TWO-TOWER")]:
             result = engine(liked, k=10)
             print(f"\n===== {label} =====")
             if "error" in result:
