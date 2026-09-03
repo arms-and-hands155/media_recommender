@@ -1,6 +1,6 @@
 # media_recommender
 
-An anime recommender built on 148M real user ratings. The main feature is cold-start recommendations: you type in a few shows you like and get recommendations back, without needing an account or any rating history in the system.
+I decided to do this project after I finished Hunter x Hunter and couldnt find any ideas for what anime to watch next. I built an anime recommender built on 148M real user ratings. The main feature is cold-start recommendations: you type in a few shows you like and get recommendations back, without needing an account or any rating history in the system.
 
 ```
 $ curl -X POST localhost:8000/recommend/neural \
