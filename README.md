@@ -98,19 +98,21 @@ The quickest way is the interactive CLI. It loads the models (takes 30–60 seco
 
 ```
 $ python api.py
-Enter anime you like (comma-separated): One Piece, Hunter x Hunter, Attack on Titan
+Enter anime you like (comma-separated): Hunter x Hunter
 
-===== ITEM-CF =====
-Interpreted your list as: One Piece, Hunter x Hunter, Attack on Titan
-  1. Death Note
-  2. One Punch Man
-  ...
+Interpreted your list as: Hunter x Hunter
 
-===== TWO-TOWER =====
-Interpreted your list as: One Piece, Hunter x Hunter, Attack on Titan
+Recommendations:
   1. Fullmetal Alchemist: Brotherhood
   2. Death Note
-  ...
+  3. Attack on Titan
+  4. One Punch Man
+  5. Your Name.
+  6. One Piece
+  7. Code Geass: Lelouch of the Rebellion
+  8. Naruto Shippuden
+  9. A Silent Voice
+  10. Steins;Gate
 ```
 
 Typos and partial titles are fine — the fuzzy matcher resolves them, and the "Interpreted your list as" line shows you what it matched, so you can tell if it guessed wrong.

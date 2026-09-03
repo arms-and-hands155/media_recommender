@@ -5,7 +5,7 @@ import pandas as pd
 import torch
 import torch.nn as nn
 from scipy.sparse import load_npz, csr_matrix
-from rapidfuzz import process, fuzz
+from rapidfuzz import process, fuzz, utils
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -66,7 +66,10 @@ def match_titles(user_titles):
     """Fuzzy-match user-typed titles to animeIDs. Returns (matched_ids, unmatched_titles)."""
     matched, unmatched = [], []
     for t in user_titles:
-        result = process.extractOne(t, titles_list, scorer=fuzz.WRatio, score_cutoff=70)
+        result = process.extractOne(
+            t, titles_list, scorer=fuzz.WRatio, score_cutoff=70,
+            processor=utils.default_process,
+        )
         if result is None:
             unmatched.append(t)
         else:
@@ -208,16 +211,15 @@ if __name__ == "__main__":
     if not liked:
         print("No titles entered.")
     else:
-        for engine, label in [(recommend_neural, "TWO-TOWER")]:
-            result = engine(liked, k=10)
-            print(f"\n===== {label} =====")
-            if "error" in result:
-                print(result["error"])
-                if result["unmatched"]:
-                    print("Couldn't match:", ", ".join(result["unmatched"]))
-                continue
+        result = recommend_neural(liked, k=10)
+        if "error" in result:
+            print(result["error"])
+            if result["unmatched"]:
+                print("Couldn't match:", ", ".join(result["unmatched"]))
+        else:
             print("Interpreted your list as:", ", ".join(result["matched"]))
             if result["unmatched"]:
                 print("Couldn't match:", ", ".join(result["unmatched"]))
+            print("\nRecommendations:")
             for i, rec in enumerate(result["recommendations"], 1):
                 print(f"  {i}. {rec['title']}")
